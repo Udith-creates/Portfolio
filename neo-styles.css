@@ -1442,8 +1442,9 @@ body[data-theme="dark"] .stat-number {
   }
 
   .map-pirate-overlay {
-    width: 600px;
-    height: 300px;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
     bottom: 5px;
     left: 5px;
   }
@@ -3696,56 +3697,163 @@ body[data-theme="dark"] .nav-lazyfire {
 ================================ */
 
 /* Hide default cursor to use ours */
-html, body, a, button, .clickable, .checkpoint, .social-btn, .nav-link, .nav-cta, .theme-toggle-nav, .btn, .github-btn {
-    cursor: none !important;
+html,
+body,
+a,
+button,
+.clickable,
+.checkpoint,
+.social-btn,
+.nav-link,
+.nav-cta,
+.theme-toggle-nav,
+.btn,
+.github-btn {
+  cursor: none !important;
 }
 
 /* The Main Dot (Instant Follow) */
 .cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 12px;
-    height: 12px;
-    background-color: #000; /* Solid Black */
-    border-radius: 50%; /* Circle */
-    pointer-events: none;
-    z-index: 999999;
-    transform: translate(-50%, -50%);
-    opacity: 0; /* Hidden initially until mouse moves */
-    transition: opacity 0.3s ease, width 0.3s, height 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #000;
+  /* Solid Black */
+  border-radius: 50%;
+  /* Circle */
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  /* Hidden initially until mouse moves */
+  transition: opacity 0.3s ease, width 0.3s, height 0.3s;
 }
 
 /* The Trailing Outline (Smooth Follow) */
 .cursor-outline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    border: 3px solid #000; /* Neo-Brutalist Thick Border */
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999998; /* Behind the dot */
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s ease, width 0.2s, height 0.2s, background-color 0.2s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #000;
+  /* Neo-Brutalist Thick Border */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999998;
+  /* Behind the dot */
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.2s, height 0.2s, background-color 0.2s;
 }
 
 /* Hover State (Expands and becomes yellow) */
 .cursor-outline.cursor-hover {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(255, 217, 61, 0.4); /* Matches var(--yellow) with transparency */
-    border-color: #000;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 217, 61, 0.4);
+  /* Matches var(--yellow) with transparency */
+  border-color: #000;
+}
+
+/* Specific adjustments for very small screens */
+@media (max-width: 480px) {
+  .hero-name {
+    font-size: 1.75rem !important;
+  }
+
+  .hero-greeting {
+    font-size: 1.25rem !important;
+  }
+
+  .hero-photo {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  .section-title-center {
+    font-size: 1.5rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .retro-card-title {
+    font-size: 1.25rem;
+  }
+
+  .popup-frame {
+    width: 90vw;
+    max-width: 280px;
+  }
+
+  .popup-image-container {
+    width: 100%;
+    height: 8rem;
+  }
+
+  .url-badge {
+    max-width: 150px;
+  }
+
+  .loader-letter {
+    width: 70px !important;
+    height: 70px !important;
+    font-size: 3rem !important;
+  }
+
+  .loader-progress-bar {
+    width: 180px !important;
+  }
+
+  .nav-brand {
+    font-size: 1.25rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .nav-cta {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  .footer-brand-compact strong {
+    font-size: 0.95rem;
+  }
+
+  .footer-brand-compact span {
+    font-size: 0.75rem;
+  }
+
+  .contact-card i {
+    font-size: 1.75rem;
+  }
+
+  .contact-card span {
+    font-size: 0.9rem;
+  }
 }
 
 /* Hide custom cursor on mobile/touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .cursor-dot, .cursor-outline {
-        display: none !important;
-    }
-    html, body, a, button {
-        cursor: auto !important;
-    }
+@media (hover: none) and (pointer: coarse),
+(max-width: 768px) {
+
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
+  }
+
+  html,
+  body,
+  a,
+  button,
+  .clickable,
+  .checkpoint,
+  .social-btn,
+  .nav-link,
+  .nav-cta,
+  .theme-toggle-nav,
+  .btn,
+  .github-btn {
+    cursor: auto !important;
+  }
 }
