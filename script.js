@@ -482,7 +482,11 @@ class TerminalResume {
         this.initGame();
         break;
       case "pdf":
-        this.generatePDF();
+      case "pdf-hw":
+        this.generatePDF('hw');
+        break;
+      case "pdf-sw":
+        this.generatePDF('sw');
         break;
       case "linkedin-cover":
         this.generateLinkedInCover(outputElement);
@@ -588,9 +592,12 @@ class TerminalResume {
       this.wrapWithColor("• matrix", "#98fb98") +
       "    " +
       this.wrapWithColor("Start Matrix digital rain effect\n", "#ffffff") +
-      this.wrapWithColor("• pdf", "#98fb98") +
+      this.wrapWithColor("• pdf-hw / pdf", "#98fb98") +
+      "  " +
+      this.wrapWithColor("Download Hardware Resume\n", "#ffffff") +
+      this.wrapWithColor("• pdf-sw", "#98fb98") +
       "       " +
-      this.wrapWithColor("Download resume as PDF\n", "#ffffff") +
+      this.wrapWithColor("Download Software Resume\n", "#ffffff") +
       this.wrapWithColor("• linkedin-cover", "#98fb98") +
       " " +
       this.wrapWithColor("Generate LinkedIn cover image\n", "#ffffff");
@@ -682,7 +689,11 @@ ${this.wrapWithColor("│", "#ff8c00")} ${this.wrapWithColor(
 ${this.wrapWithColor(
       "╰───────────────────────────────────────────────────────╯",
       "#ff8c00"
-    )}`;
+    )}
+
+${this.wrapWithColor("📄 Resumes", "#ff8c00")}
+   ${this.wrapWithColor("Type ", "#ffffff")}${this.wrapWithColor("'pdf-hw'", "#98fb98")}${this.wrapWithColor(" to download Hardware Resume", "#ffffff")}
+   ${this.wrapWithColor("Type ", "#ffffff")}${this.wrapWithColor("'pdf-sw'", "#98fb98")}${this.wrapWithColor(" to download Software Resume", "#ffffff")}`;
 
     const aboutDiv = document.createElement("div");
     aboutDiv.innerHTML = about;
@@ -1141,16 +1152,22 @@ ${this.wrapWithColor("╰──────────────────�
   }
 
   // PDF Generation
-  async generatePDF() {
+  async generatePDF(type = 'hw') {
     const outputElement = this.terminals[this.activeTerminal].input
       .closest(".terminal-content")
       .querySelector("[id^='output']");
-    this.printToOutput(outputElement, "Downloading Hardware Resume...", "info");
+
+    const isHardware = type === 'hw';
+    const fileName = isHardware ? 'RESUME.pdf' : 'CSE_RESUME.pdf';
+    const downloadName = isHardware ? 'Udith_Nair_Hardware_Resume.pdf' : 'Udith_Nair_Software_Resume.pdf';
+    const label = isHardware ? 'Hardware' : 'Software';
+
+    this.printToOutput(outputElement, `Downloading ${label} Resume...`, "info");
 
     // Create a temporary link and trigger download
     const link = document.createElement('a');
-    link.href = 'print/RESUME.pdf';
-    link.download = 'Udith_Nair_Hardware_Resume.pdf';
+    link.href = `print/${fileName}`;
+    link.download = downloadName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1158,7 +1175,7 @@ ${this.wrapWithColor("╰──────────────────�
     setTimeout(() => {
       this.printToOutput(
         outputElement,
-        "Resume downloaded successfully.",
+        `${label} Resume downloaded successfully.`,
         "success"
       );
     }, 1000);
